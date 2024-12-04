@@ -19,7 +19,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 30px;
-    position: relative; /* For positioning the music button */
+    position: relative;
 }
 header h1 {
     font-size: 3em;
@@ -31,11 +31,15 @@ header p {
     color: #856a5d;
 }
 
-/* Music Button */
-.music-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+/* Music Control */
+.music-control {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: -30px;
+}
+
+.music-control button {
     background-color: #7b5840;
     color: #ffffff;
     border: none;
@@ -46,9 +50,14 @@ header p {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.music-button:hover {
+.music-control button:hover {
     background-color: #5a2d22;
     transform: scale(1.05);
+}
+
+.music-control button:focus {
+    outline: 2px solid #5a2d22;
+    outline-offset: 2px;
 }
 
 /* Main Layout */
@@ -65,9 +74,9 @@ header p {
     max-width: 300px;
     background-color: #fff7e6;
     padding: 20px;
-    border: 3px solid #b68973; /* Warm brown border */
+    border: 3px solid #b68973;
     border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for separation */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
 }
@@ -78,7 +87,6 @@ header p {
     color: #7b5840;
 }
 
-/* Add a horizontal separator */
 #table-of-contents hr {
     border: none;
     height: 1px;
@@ -86,7 +94,6 @@ header p {
     margin: 10px 0;
 }
 
-/* Content Section */
 .content-section {
     margin-bottom: 20px;
 }
@@ -110,7 +117,6 @@ ul li a:hover {
     text-decoration: underline;
 }
 
-/* Highlight the active page */
 ul li a.active {
     color: #ffffff;
     background-color: #7b5840;
@@ -122,8 +128,8 @@ ul li a.active {
 #viewer-controls {
     display: flex;
     gap: 10px;
-    margin-top: 15px; /* Adds spacing above the separator */
-    margin-bottom: 15px; /* Adds spacing below the buttons */
+    margin-top: 15px;
+    margin-bottom: 15px;
     justify-content: flex-start;
 }
 
@@ -135,32 +141,30 @@ ul li a.active {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animations */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Hover and Focus Effects */
 #viewer-controls button:hover:not(:disabled),
 #viewer-controls button:focus {
     background-color: #5a2d22;
-    transform: scale(1.05); /* Slight scaling for feedback */
+    transform: scale(1.05);
     outline: none;
 }
 
-/* Disabled Button Styles */
 #viewer-controls button:disabled {
     background-color: #d6c7b8;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Embedded Viewer (iframe) */
+/* Embedded Viewer */
 iframe#viewer {
     flex: 3;
     width: 100%;
     height: calc(100vh - 150px);
-    border: 3px solid #b68973; /* Matching table of contents */
+    border: 3px solid #b68973;
     border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     background: linear-gradient(to bottom, #faf3e0, #f0e0c6);
     background-clip: padding-box;
     transform-origin: center;
@@ -172,7 +176,6 @@ iframe#viewer:hover {
     transform: scale(1.02);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     #main-container {
         flex-direction: column;
