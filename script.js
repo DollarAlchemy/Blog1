@@ -33,25 +33,31 @@ const links = document.querySelectorAll("#table-of-contents a");
 const playButton = document.getElementById("play-btn");
 const pauseButton = document.getElementById("pause-btn");
 const audio = document.getElementById("background-audio");
+const volumeSlider = document.getElementById("volume-slider");
 
-// Initialize music control
+// Initialize music controls
 audio.loop = true;
+audio.volume = 0.5; // Default volume (50%)
 audio.play(); // Ensure music starts by default
-playButton.classList.remove("active");
-pauseButton.classList.add("active");
+playButton.classList.add("active");
+
+// Update volume based on slider input
+volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.value / 100;
+});
 
 // Play Music
 playButton.addEventListener("click", () => {
     audio.play();
-    playButton.classList.remove("active");
-    pauseButton.classList.add("active");
+    playButton.classList.add("active");
+    pauseButton.classList.remove("active");
 });
 
 // Pause Music
 pauseButton.addEventListener("click", () => {
     audio.pause();
-    pauseButton.classList.remove("active");
-    playButton.classList.add("active");
+    pauseButton.classList.add("active");
+    playButton.classList.remove("active");
 });
 
 // Update active link and manage history
@@ -89,8 +95,8 @@ function highlightActiveLink(href) {
 // Update navigation button states
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= pageHistory.length - 1;
-    clearButton.disabled = pageHistory.length === 0;
+    forwardButton.disabled = currentIndex >= topics.length - 1 || currentIndex >= pageHistory.length - 1;
+    clearButton.disabled = currentIndex === -1 && pageHistory.length === 0;
 }
 
 // Add click listeners to links
@@ -105,7 +111,7 @@ links.forEach((link) => {
 backButton.addEventListener("click", () => {
     if (currentIndex > 0) {
         currentIndex--;
-        iframe.src = pageHistory[currentIndex];
+        iframe.src = pageHistory[currentIndex] || topics[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
         updateButtonStates();
     }
@@ -120,10 +126,9 @@ forwardButton.addEventListener("click", () => {
         updateButtonStates();
     } else if (currentIndex < topics.length - 1) {
         currentIndex++;
-        const nextTopic = topics[currentIndex];
-        iframe.src = nextTopic;
-        pageHistory.push(nextTopic);
-        highlightActiveLink(nextTopic);
+        iframe.src = topics[currentIndex];
+        pageHistory.push(topics[currentIndex]);
+        highlightActiveLink(topics[currentIndex]);
         updateButtonStates();
     }
 });
