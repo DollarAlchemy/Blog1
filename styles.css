@@ -88,14 +88,7 @@ ul li a.active {
     border-radius: 5px;
 }
 
-/* Viewer Controls (embedded into Table of Contents) */
-#viewer-controls {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: space-between; /* Align buttons horizontally */
-}
-
+/* Default button styles */
 #viewer-controls button {
     padding: 10px 15px;
     font-size: 1em;
@@ -107,8 +100,15 @@ ul li a.active {
     transition: background-color 0.3s ease;
 }
 
-#viewer-controls button:hover {
+/* Hover effect for active buttons */
+#viewer-controls button:hover:not(:disabled) {
     background-color: #5a2d22;
+}
+
+/* Disabled button styles */
+#viewer-controls button:disabled {
+    background-color: #d6c7b8;
+    cursor: not-allowed;
 }
 
 /* Embedded Viewer (iframe) */
