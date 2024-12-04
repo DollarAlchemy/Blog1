@@ -43,9 +43,9 @@ header p {
     max-width: 300px;
     background-color: #fff7e6;
     padding: 20px;
-    border: 3px solid #b68973; /* Thicker, warm brown border */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly more prominent shadow */
+    border: 3px solid #b68973; /* Distinct warm brown border */
+    border-radius: 15px; /* Softer rounded corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for separation */
     overflow-y: auto; /* Add scrolling if content exceeds the height */
     height: calc(100vh - 150px); /* Make the table of contents fill most of the screen */
 }
@@ -93,10 +93,19 @@ iframe#viewer {
     flex: 3; /* Remaining space goes to the viewer */
     width: 100%;
     height: calc(100vh - 150px); /* Same height as the table of contents */
-    border: 3px solid #b68973; /* Thicker, warm brown border matching table of contents */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Matching shadow for consistency */
-    background-color: #ffffff; /* White background inside the iframe */
+    border: 3px solid #b68973; /* Distinct warm brown border matching table of contents */
+    border-radius: 15px; /* Softer rounded corners for consistency */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow for more character */
+    background: linear-gradient(to bottom, #faf3e0, #f0e0c6); /* Subtle gradient background */
+    background-clip: padding-box; /* Ensure gradient doesn't overlap border */
+    transform-origin: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animations */
+}
+
+/* Add a hover effect to make the iframe "shine" */
+iframe#viewer:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); /* Slightly stronger shadow on hover */
+    transform: scale(1.02); /* Subtle scaling effect */
 }
 
 /* Responsive Design */
