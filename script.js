@@ -15,6 +15,9 @@ const topics = [
     "topics/personal-projects.html",
 ];
 
+// Default page for resetting the iframe
+const defaultPage = "default.html";
+
 // Variables to track history
 let pageHistory = [];
 let currentIndex = -1;
@@ -61,8 +64,9 @@ function highlightActiveLink(href) {
 // Update navigation button states (enable/disable)
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
-    clearButton.disabled = pageHistory.length === 0 && currentIndex === -1;
+    forwardButton.disabled =
+        currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
+    clearButton.disabled = currentIndex === -1 && pageHistory.length === 0;
 }
 
 // Add click listeners to links
@@ -103,12 +107,15 @@ forwardButton.addEventListener("click", () => {
 
 // Clear Button Logic
 clearButton.addEventListener("click", () => {
-    iframe.src = ""; // Clear the iframe content
+    iframe.src = defaultPage; // Reset the iframe to the default page
     pageHistory = []; // Reset the history
     currentIndex = -1; // Reset index
     links.forEach((link) => link.classList.remove("active")); // Remove active class from all links
-    updateButtonStates();
+    updateButtonStates(); // Disable navigation buttons
 });
 
-// Initialize button states on page load
-updateButtonStates();
+// Load the default page when the index.html is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    iframe.src = defaultPage;
+    updateButtonStates();
+});
