@@ -37,15 +37,14 @@ const volumeSlider = document.getElementById("volume-slider");
 
 // Initialize music controls
 audio.loop = true;
-audio.volume = 1; // Default to max volume
+audio.volume = 0.25; // Default volume at 25%
 audio.play(); // Start music by default
+volumeSlider.value = 25; // Default slider position at 25%
 
-// Update volume based on slider steps (0%, 25%, 50%, 75%, 100%)
+// Update volume based on slider input (0% to 25% with 5% intervals)
 volumeSlider.addEventListener("input", () => {
-    const volumeSteps = [0, 0.25, 0.5, 0.75, 1];
-    const stepIndex = Math.round(volumeSlider.value * (volumeSteps.length - 1));
-    audio.volume = volumeSteps[stepIndex];
-    volumeSlider.value = stepIndex / (volumeSteps.length - 1); // Snap to step
+    const sliderValue = parseInt(volumeSlider.value, 10); // Get current slider value (0-25)
+    audio.volume = sliderValue / 100; // Scale to match slider value
 });
 
 // Play Music
@@ -97,7 +96,8 @@ function highlightActiveLink(href) {
 // Update navigation button states
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
+    forwardButton.disabled =
+        (currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1);
     clearButton.disabled = pageHistory.length === 0;
 }
 
@@ -140,8 +140,8 @@ forwardButton.addEventListener("click", () => {
 // Clear Button Logic
 clearButton.addEventListener("click", () => {
     iframe.src = defaultPage; // Reset the iframe to the default page
-    pageHistory = [];
-    currentIndex = -1;
+    pageHistory = [defaultPage];
+    currentIndex = 0;
     links.forEach((link) => link.classList.remove("active"));
     updateButtonStates();
 });
@@ -149,7 +149,8 @@ clearButton.addEventListener("click", () => {
 // Load the default page and initialize history when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     iframe.src = defaultPage;
-    pageHistory = [defaultPage];
+    pageHistory = [default Page];
     currentIndex = 0;
     updateButtonStates();
 });
+
