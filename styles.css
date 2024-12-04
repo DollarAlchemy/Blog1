@@ -1,8 +1,108 @@
-/* Viewer Controls (buttons) */
+/* Reset */
+body, h1, h2, h3, p, ul, li, a, button {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* General Styling */
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.8;
+    color: #4a4a4a;
+    background-color: #faf3e0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: #7b5840;
+}
+header p {
+    font-size: 1.2em;
+    color: #856a5d;
+}
+
+/* Main Layout */
+#main-container {
+    display: flex;
+    gap: 20px; /* Space between table of contents and viewer */
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* Table of Contents */
+#table-of-contents {
+    flex: 1 1 300px;
+    max-width: 300px;
+    background-color: #fff7e6;
+    padding: 20px;
+    border: 3px solid #b68973; /* Warm brown border */
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for separation */
+    display: flex;
+    flex-direction: column;
+}
+
+#table-of-contents h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #7b5840;
+}
+
+/* Add a horizontal separator */
+#table-of-contents hr {
+    border: none;
+    height: 1px;
+    background-color: #b68973;
+    margin: 10px 0;
+}
+
+/* Content Section */
+.content-section {
+    margin-bottom: 20px;
+}
+.content-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #7b5840;
+}
+ul {
+    padding-left: 20px;
+}
+ul li {
+    margin: 10px 0;
+}
+ul li a {
+    color: #5a2d22;
+    text-decoration: none;
+    font-weight: bold;
+}
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Highlight the active page */
+ul li a.active {
+    color: #ffffff;
+    background-color: #7b5840;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Viewer Controls */
 #viewer-controls {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px; /* Adds space between buttons and separator */
+    margin-top: 15px; /* Adds spacing above the separator */
+    margin-bottom: 15px; /* Adds spacing below the buttons */
     justify-content: flex-start;
 }
 
@@ -17,6 +117,7 @@
     transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animations */
 }
 
+/* Hover and Focus Effects */
 #viewer-controls button:hover:not(:disabled),
 #viewer-controls button:focus {
     background-color: #5a2d22;
@@ -24,17 +125,44 @@
     outline: none;
 }
 
-/* Disabled button styles */
+/* Disabled Button Styles */
 #viewer-controls button:disabled {
     background-color: #d6c7b8;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Add a horizontal separator */
-#table-of-contents hr {
-    border: none;
-    height: 1px;
-    background-color: #b68973;
-    margin: 10px 0;
+/* Embedded Viewer (iframe) */
+iframe#viewer {
+    flex: 3;
+    width: 100%;
+    height: calc(100vh - 150px);
+    border: 3px solid #b68973; /* Matching table of contents */
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(to bottom, #faf3e0, #f0e0c6);
+    background-clip: padding-box;
+    transform-origin: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+iframe#viewer:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #main-container {
+        flex-direction: column;
+    }
+
+    #table-of-contents, iframe#viewer {
+        width: 100%;
+        height: auto;
+    }
+
+    #viewer-controls {
+        justify-content: center;
+    }
 }
