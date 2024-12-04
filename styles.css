@@ -37,14 +37,15 @@ header p {
     justify-content: flex-start;
 }
 
+/* Table of Contents */
 #table-of-contents {
     flex: 1 1 300px; /* Fixed width for the table of contents */
     max-width: 300px;
     background-color: #fff7e6;
     padding: 20px;
-    border: 1px solid #e8d4c0;
+    border: 3px solid #b68973; /* Thicker, warm brown border */
     border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly more prominent shadow */
     overflow-y: auto; /* Add scrolling if content exceeds the height */
     height: calc(100vh - 150px); /* Make the table of contents fill most of the screen */
 }
@@ -92,9 +93,10 @@ iframe#viewer {
     flex: 3; /* Remaining space goes to the viewer */
     width: 100%;
     height: calc(100vh - 150px); /* Same height as the table of contents */
-    border: 1px solid #e8d4c0;
+    border: 3px solid #b68973; /* Thicker, warm brown border matching table of contents */
     border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Matching shadow for consistency */
+    background-color: #ffffff; /* White background inside the iframe */
 }
 
 /* Responsive Design */
