@@ -48,6 +48,8 @@ header p {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for separation */
     overflow-y: auto; /* Add scrolling if content exceeds the height */
     height: calc(100vh - 150px); /* Make the table of contents fill most of the screen */
+    display: flex;
+    flex-direction: column; /* Ensure children stack properly */
 }
 
 #table-of-contents h2 {
@@ -88,7 +90,14 @@ ul li a.active {
     border-radius: 5px;
 }
 
-/* Default button styles */
+/* Viewer Controls */
+#viewer-controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
 #viewer-controls button {
     padding: 10px 15px;
     font-size: 1em;
@@ -97,18 +106,22 @@ ul li a.active {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animations */
 }
 
-/* Hover effect for active buttons */
-#viewer-controls button:hover:not(:disabled) {
+/* Hover and Focus Effects */
+#viewer-controls button:hover:not(:disabled),
+#viewer-controls button:focus {
     background-color: #5a2d22;
+    transform: scale(1.05); /* Slight scaling for feedback */
+    outline: none;
 }
 
 /* Disabled button styles */
 #viewer-controls button:disabled {
     background-color: #d6c7b8;
     cursor: not-allowed;
+    transform: none;
 }
 
 /* Embedded Viewer (iframe) */
@@ -140,5 +153,9 @@ iframe#viewer:hover {
     #table-of-contents, iframe#viewer {
         width: 100%;
         height: auto;
+    }
+
+    #viewer-controls {
+        justify-content: center;
     }
 }
