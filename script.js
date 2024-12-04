@@ -25,6 +25,9 @@ function updateActiveLink(event) {
 
     // Highlight the active link
     highlightActiveLink(href);
+
+    // Update button states
+    updateButtonStates();
 }
 
 // Highlight active link in the table of contents
@@ -36,6 +39,18 @@ function highlightActiveLink(href) {
             link.classList.remove('active');
         }
     });
+}
+
+// Update navigation button states (enable/disable)
+function updateButtonStates() {
+    // Disable Back button if no previous history
+    backButton.disabled = currentIndex <= 0;
+
+    // Disable Forward button if no forward history
+    forwardButton.disabled = currentIndex >= pageHistory.length - 1;
+
+    // Enable or disable Clear button based on history presence
+    clearButton.disabled = pageHistory.length === 0;
 }
 
 // Add click listeners to links
@@ -53,6 +68,7 @@ backButton.addEventListener('click', () => {
         const previousPage = pageHistory[currentIndex];
         iframe.src = previousPage;
         highlightActiveLink(previousPage);
+        updateButtonStates();
     }
 });
 
@@ -63,6 +79,7 @@ forwardButton.addEventListener('click', () => {
         const nextPage = pageHistory[currentIndex];
         iframe.src = nextPage;
         highlightActiveLink(nextPage);
+        updateButtonStates();
     }
 });
 
@@ -72,4 +89,8 @@ clearButton.addEventListener('click', () => {
     pageHistory = []; // Reset the history
     currentIndex = -1; // Reset index
     links.forEach(link => link.classList.remove('active')); // Remove active class from all links
+    updateButtonStates();
 });
+
+// Initialize button states on page load
+updateButtonStates();
