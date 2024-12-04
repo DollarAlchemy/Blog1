@@ -20,7 +20,7 @@ const defaultPage = "default.html";
 
 // Variables to track history
 let pageHistory = [];
-let currentIndex = 0; // Initialize with the first topic by default
+let currentIndex = 0;
 
 // Get DOM elements
 const backButton = document.getElementById("back-btn");
@@ -35,16 +35,19 @@ const pauseButton = document.getElementById("pause-btn");
 const audio = document.getElementById("background-audio");
 const volumeSlider = document.getElementById("volume-slider");
 
+// Dark Mode Toggle
+const themeToggle = document.getElementById("theme-toggle");
+
 // Initialize music controls
 audio.loop = true;
 audio.volume = 0.25; // Default volume at 25%
-audio.play(); // Start music by default
+audio.play();
 volumeSlider.value = 25; // Default slider position at 25%
 
 // Volume Slider Logic
 volumeSlider.addEventListener("input", () => {
     const sliderValue = parseInt(volumeSlider.value, 10); // Get current slider value
-    audio.volume = sliderValue / 100; // Scale slider value (0-25) to audio volume (0.0-0.25)
+    audio.volume = sliderValue / 25; // Scale slider value (0-25) to audio volume (0.0-1.0)
 });
 
 // Play Music
@@ -59,6 +62,14 @@ pauseButton.addEventListener("click", () => {
     audio.pause();
     pauseButton.classList.add("active");
     playButton.classList.remove("active");
+});
+
+// Dark Mode Toggle Logic
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    themeToggle.textContent = document.body.classList.contains("dark-mode")
+        ? "🌙 Dark Mode"
+        : "🌞 Light Mode";
 });
 
 // Active Link and History Management
