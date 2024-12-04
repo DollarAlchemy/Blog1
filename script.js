@@ -29,6 +29,25 @@ const clearButton = document.getElementById("clear-btn");
 const iframe = document.getElementById("viewer");
 const links = document.querySelectorAll("#table-of-contents a");
 
+// Add background music controls
+const musicControl = document.createElement("button");
+musicControl.id = "music-btn";
+musicControl.textContent = "Play Music";
+document.querySelector("header").appendChild(musicControl);
+
+const audio = new Audio("background.mp3");
+audio.loop = true;
+
+musicControl.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        musicControl.textContent = "Pause Music";
+    } else {
+        audio.pause();
+        musicControl.textContent = "Play Music";
+    }
+});
+
 // Update active link and manage history
 function updateActiveLink(event) {
     const href = event.target.getAttribute("href");
