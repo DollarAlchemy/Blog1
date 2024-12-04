@@ -37,13 +37,15 @@ const volumeSlider = document.getElementById("volume-slider");
 
 // Initialize music controls
 audio.loop = true;
-audio.volume = 0.5; // Default volume (50%)
-audio.play(); // Ensure music starts by default
-playButton.classList.add("active");
+audio.volume = 1; // Default to max volume
+audio.play(); // Start music by default
 
-// Update volume based on slider input
+// Update volume based on slider steps (0%, 25%, 50%, 75%, 100%)
 volumeSlider.addEventListener("input", () => {
-    audio.volume = volumeSlider.value / 100;
+    const volumeSteps = [0, 0.25, 0.5, 0.75, 1];
+    const stepIndex = Math.round(volumeSlider.value * (volumeSteps.length - 1));
+    audio.volume = volumeSteps[stepIndex];
+    volumeSlider.value = stepIndex / (volumeSteps.length - 1); // Snap to step
 });
 
 // Play Music
@@ -95,8 +97,8 @@ function highlightActiveLink(href) {
 // Update navigation button states
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= topics.length - 1 || currentIndex >= pageHistory.length - 1;
-    clearButton.disabled = currentIndex === -1 && pageHistory.length === 0;
+    forwardButton.disabled = currentIndex >= pageHistory.length - 1;
+    clearButton.disabled = pageHistory.length === 0;
 }
 
 // Add click listeners to links
@@ -111,7 +113,7 @@ links.forEach((link) => {
 backButton.addEventListener("click", () => {
     if (currentIndex > 0) {
         currentIndex--;
-        iframe.src = pageHistory[currentIndex] || topics[currentIndex];
+        iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
         updateButtonStates();
     }
@@ -119,21 +121,12 @@ backButton.addEventListener("click", () => {
 
 // Forward Button Logic
 forwardButton.addEventListener("click", () => {
-    // If we are navigating within pageHistory
     if (currentIndex < pageHistory.length - 1) {
         currentIndex++;
         iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
-    } 
-    // If we are navigating to new topics not in history
-    else if (currentIndex < topics.length - 1) {
-        currentIndex++;
-        const newTopic = topics[currentIndex];
-        iframe.src = newTopic;
-        pageHistory.push(newTopic); // Add to history
-        highlightActiveLink(newTopic);
+        updateButtonStates();
     }
-    updateButtonStates();
 });
 
 // Clear Button Logic
