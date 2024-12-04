@@ -28,23 +28,19 @@ const forwardButton = document.getElementById("forward-btn");
 const clearButton = document.getElementById("clear-btn");
 const iframe = document.getElementById("viewer");
 const links = document.querySelectorAll("#table-of-contents a");
+const musicToggle = document.getElementById("toggle-music");
+const audio = document.getElementById("background-audio"); // Use the existing audio element
 
-// Add background music controls
-const musicControl = document.createElement("button");
-musicControl.id = "music-btn";
-musicControl.textContent = "Play Music";
-document.querySelector("header").appendChild(musicControl);
+// Initialize audio controls
+audio.loop = true; // Ensure the audio loops
 
-const audio = new Audio("background.mp3");
-audio.loop = true;
-
-musicControl.addEventListener("click", () => {
+musicToggle.addEventListener("click", () => {
     if (audio.paused) {
         audio.play();
-        musicControl.textContent = "Pause Music";
+        musicToggle.textContent = "Pause Music"; // Update button text
     } else {
         audio.pause();
-        musicControl.textContent = "Play Music";
+        musicToggle.textContent = "Play Music"; // Update button text
     }
 });
 
