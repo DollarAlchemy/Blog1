@@ -43,13 +43,8 @@ function highlightActiveLink(href) {
 
 // Update navigation button states (enable/disable)
 function updateButtonStates() {
-    // Disable Back button if no previous history
     backButton.disabled = currentIndex <= 0;
-
-    // Disable Forward button if no forward history
     forwardButton.disabled = currentIndex >= pageHistory.length - 1;
-
-    // Enable or disable Clear button based on history presence
     clearButton.disabled = pageHistory.length === 0;
 }
 
