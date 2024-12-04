@@ -1,86 +1,52 @@
 /* Reset */
-body, h1, h2, p, ul, li, a {
+body, h1, h2, h3, p, ul, li, a {
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
 }
 
-/* Body Styling */
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
+    font-family: 'Georgia', serif;
+    line-height: 1.8;
+    color: #4a4a4a;
+    background-color: #faf3e0;
     padding: 20px;
 }
 
-/* Header */
 header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 header h1 {
-    font-size: 2.5em;
+    font-size: 3em;
     margin-bottom: 10px;
+    color: #7b5840;
 }
 header p {
     font-size: 1.2em;
-    color: #555;
+    color: #856a5d;
 }
 
-/* Navigation */
-nav {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+/* Table of Contents */
+#table-of-contents {
+    text-align: center;
+    background-color: #fff7e6;
+    padding: 20px;
+    border: 1px solid #e8d4c0;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
-nav h2 {
+#table-of-contents h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #7b5840;
+}
+.content-section {
+    margin-bottom: 20px;
+}
+.content-section h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
-}
-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-nav li a {
-    color: #007BFF;
-    padding: 5px 10px;
-    background-color: #f0f8ff;
-    border: 1px solid #007BFF;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-nav li a:hover {
-    background-color: #007BFF;
-    color: #fff;
-}
-
-/* Main Content */
-main section {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-main h2 {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-    color: #333;
-}
-main p {
-    font-size: 1em;
-    color: #555;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #777;
-}
+    color: #
