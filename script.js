@@ -34,14 +34,19 @@ const playButton = document.getElementById("play-btn");
 const pauseButton = document.getElementById("pause-btn");
 const audio = document.getElementById("background-audio");
 
-// Initialize audio controls
+// Initialize music control
 audio.loop = true;
+audio.play(); // Ensure music starts by default
+playButton.classList.add("hidden");
+pauseButton.classList.add("active");
 
 // Play Music
 playButton.addEventListener("click", () => {
     audio.play();
     playButton.classList.add("hidden");
     pauseButton.classList.remove("hidden");
+    pauseButton.classList.add("active");
+    playButton.classList.remove("active");
 });
 
 // Pause Music
@@ -49,6 +54,8 @@ pauseButton.addEventListener("click", () => {
     audio.pause();
     pauseButton.classList.add("hidden");
     playButton.classList.remove("hidden");
+    playButton.classList.add("active");
+    pauseButton.classList.remove("active");
 });
 
 // Update active link and manage history
@@ -86,7 +93,7 @@ function highlightActiveLink(href) {
 // Update navigation button states
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= topics.length - 1;
+    forwardButton.disabled = currentIndex >= topics.length - 1 || currentIndex >= pageHistory.length - 1;
     clearButton.disabled = currentIndex === -1 && pageHistory.length === 0;
 }
 
@@ -110,7 +117,12 @@ backButton.addEventListener("click", () => {
 
 // Forward Button Logic
 forwardButton.addEventListener("click", () => {
-    if (currentIndex < topics.length - 1) {
+    if (currentIndex < pageHistory.length - 1) {
+        currentIndex++;
+        iframe.src = pageHistory[currentIndex];
+        highlightActiveLink(pageHistory[currentIndex]);
+        updateButtonStates();
+    } else if (currentIndex < topics.length - 1) {
         currentIndex++;
         iframe.src = topics[currentIndex];
         pageHistory.push(topics[currentIndex]);
