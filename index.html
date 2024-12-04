@@ -12,12 +12,14 @@
         <p>Welcome to a journey of mindfulness, focus, and purposeful living.</p>
         
         <!-- Music Control Center -->
-        <div id="music-control-center" class="music-control">
+       <div id="music-control-center" class="music-control">
     <p class="music-label">Music Controls</p>
-    <button id="play-btn" class="music-button active">▶ Play</button>
-    <button id="pause-btn" class="music-button">⏸ Pause</button>
+    <div class="button-group">
+        <button id="play-btn" class="music-button active">▶ Play</button>
+        <button id="pause-btn" class="music-button">⏸ Pause</button>
+    </div>
     <div class="volume-container">
-        <label for="volume-slider" class="volume-label">Volume</label>
+        <p class="volume-label">Volume</p>
         <input id="volume-slider" type="range" min="0" max="1" step="0.1" value="1" title="Volume">
     </div>
     <audio id="background-audio" autoplay loop>
@@ -25,6 +27,7 @@
         Your browser does not support the audio element.
     </audio>
 </div>
+
         <hr />
     </header>
     <main>
