@@ -35,12 +35,10 @@ header p {
 
 /* Music Control Center */
 #music-control-center {
-    position: absolute;
-    top: 20px;
-    left: 20px; /* Positioned on the left */
+    position: relative;
     display: flex;
     flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center align */
+    align-items: center; /* Center align elements */
     justify-content: center;
     gap: 10px; /* Space between elements */
     padding: 15px 20px;
@@ -48,7 +46,8 @@ header p {
     border: 2px solid #66bb6a;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 250px; /* Set a fixed width for compact design */
+    margin: 0 auto; /* Center align on the page */
 }
 
 #music-control-center:hover {
@@ -56,19 +55,23 @@ header p {
     transform: scale(1.02);
 }
 
+/* Music Label */
 .music-label {
     font-size: 1rem;
     color: #388e3c; /* Dark green for label */
     font-weight: bold;
     margin-bottom: 5px;
+    text-align: center;
 }
 
+/* Play and Pause Buttons */
 .music-button {
+    width: 100px; /* Set consistent button width */
     background-color: #66bb6a;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 8px 15px;
+    padding: 8px 0;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -76,7 +79,7 @@ header p {
 
 .music-button:hover {
     background-color: #388e3c;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .music-button.active {
@@ -84,24 +87,33 @@ header p {
     box-shadow: 0 0 8px rgba(46, 125, 50, 0.8);
 }
 
+/* Button Group for Play/Pause */
+.button-group {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    justify-content: center;
+}
+
 /* Volume Slider Container */
 .volume-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack label and slider vertically */
     align-items: center;
-    margin-top: 10px;
-    gap: 5px;
+    justify-content: center;
+    gap: 5px; /* Space between label and slider */
+    width: 100%;
 }
 
 .volume-label {
     font-size: 0.9rem;
     color: #388e3c;
     font-weight: bold;
+    text-align: center;
 }
 
 #volume-slider {
     appearance: none;
-    width: 120px;
+    width: 80%; /* Fit within container */
     height: 8px;
     background: #66bb6a;
     border-radius: 5px;
@@ -123,10 +135,23 @@ header p {
     background-color: #1b5e20;
 }
 
-/* Hidden State for Optional Elements */
-.hidden {
-    display: none;
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    #music-control-center {
+        width: 90%; /* Adjust to fit screen width */
+        max-width: none; /* Remove fixed width */
+    }
+
+    .music-button {
+        font-size: 0.9rem;
+        padding: 6px 0;
+    }
+
+    #volume-slider {
+        width: 100%; /* Full width on smaller screens */
+    }
 }
+
 
 /* Main Layout */
 #main-container {
