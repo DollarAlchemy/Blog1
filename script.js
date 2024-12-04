@@ -1,16 +1,16 @@
-// Get all table of contents links
+// Get all links in the Table of Contents
 const links = document.querySelectorAll('#table-of-contents a');
 
-// Function to update the active class
+// Function to update the "active" class
 function updateActiveLink(event) {
-    // Remove active class from all links
+    // Remove the "active" class from all links
     links.forEach(link => link.classList.remove('active'));
 
-    // Add active class to the clicked link
+    // Add the "active" class to the clicked link
     event.target.classList.add('active');
 }
 
-// Add click event listener to all links
+// Add click event listeners to each link
 links.forEach(link => {
     link.addEventListener('click', updateActiveLink);
 });
