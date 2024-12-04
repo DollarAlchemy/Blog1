@@ -53,6 +53,13 @@ header p {
     transform: scale(1.02);
 }
 
+.music-label {
+    font-size: 0.9rem;
+    color: #4a4a4a;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
 .music-button {
     background-color: #7b5840;
     color: white;
@@ -61,7 +68,7 @@ header p {
     padding: 8px 15px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .music-button:hover {
@@ -74,9 +81,9 @@ header p {
     outline-offset: 2px;
 }
 
-.music-indicator {
-    font-size: 0.9rem;
-    color: #4a4a4a;
+.music-button.active {
+    background-color: #5a2d22;
+    box-shadow: 0 0 8px rgba(90, 45, 34, 0.8);
 }
 
 /* Hidden State for Optional Elements */
