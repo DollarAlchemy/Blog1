@@ -119,18 +119,21 @@ backButton.addEventListener("click", () => {
 
 // Forward Button Logic
 forwardButton.addEventListener("click", () => {
+    // If we are navigating within pageHistory
     if (currentIndex < pageHistory.length - 1) {
         currentIndex++;
         iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
-        updateButtonStates();
-    } else if (currentIndex < topics.length - 1) {
+    } 
+    // If we are navigating to new topics not in history
+    else if (currentIndex < topics.length - 1) {
         currentIndex++;
-        iframe.src = topics[currentIndex];
-        pageHistory.push(topics[currentIndex]);
-        highlightActiveLink(topics[currentIndex]);
-        updateButtonStates();
+        const newTopic = topics[currentIndex];
+        iframe.src = newTopic;
+        pageHistory.push(newTopic); // Add to history
+        highlightActiveLink(newTopic);
     }
+    updateButtonStates();
 });
 
 // Clear Button Logic
