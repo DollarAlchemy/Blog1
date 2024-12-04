@@ -28,20 +28,27 @@ const forwardButton = document.getElementById("forward-btn");
 const clearButton = document.getElementById("clear-btn");
 const iframe = document.getElementById("viewer");
 const links = document.querySelectorAll("#table-of-contents a");
-const musicToggle = document.getElementById("music-toggle");
+
+// Music Control Elements
+const playButton = document.getElementById("play-btn");
+const pauseButton = document.getElementById("pause-btn");
 const audio = document.getElementById("background-audio");
 
 // Initialize audio controls
 audio.loop = true;
 
-musicToggle.addEventListener("click", () => {
-    if (audio.paused) {
-        audio.play();
-        musicToggle.textContent = "Pause Music";
-    } else {
-        audio.pause();
-        musicToggle.textContent = "Play Music";
-    }
+// Play Music
+playButton.addEventListener("click", () => {
+    audio.play();
+    playButton.classList.add("hidden");
+    pauseButton.classList.remove("hidden");
+});
+
+// Pause Music
+pauseButton.addEventListener("click", () => {
+    audio.pause();
+    pauseButton.classList.add("hidden");
+    playButton.classList.remove("hidden");
 });
 
 // Update active link and manage history
