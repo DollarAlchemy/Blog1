@@ -31,12 +31,15 @@ header p {
 
 /* Table of Contents */
 #table-of-contents {
-    text-align: center;
+    text-align: left;
     background-color: #fff7e6;
     padding: 20px;
     border: 1px solid #e8d4c0;
     border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+    width: 25%;
+    float: left;
 }
 #table-of-contents h2 {
     font-size: 2em;
@@ -49,4 +52,31 @@ header p {
 .content-section h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
-    color: #
+    color: #7b5840;
+}
+ul {
+    padding-left: 20px;
+}
+ul li {
+    margin: 10px 0;
+}
+ul li a {
+    color: #5a2d22;
+    text-decoration: none;
+    font-weight: bold;
+}
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Embedded Viewer (iframe) */
+iframe#viewer {
+    width: 70%; /* Takes up remaining width */
+    height: 600px;
+    border: 1px solid #e8d4c0;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 5%; /* Adds some spacing from the table of contents */
+    float: left;
+    background-color: #fff;
+}
