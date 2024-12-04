@@ -118,4 +118,28 @@ iframe#viewer:hover {
         width: 100%;
         height: auto;
     }
+
+/* Viewer Controls */
+#viewer-controls {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#viewer-controls button {
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #7b5840;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#viewer-controls button:hover {
+    background-color: #5a2d22;
+}
+
 }
