@@ -21,11 +21,13 @@ header {
     margin-bottom: 30px;
     position: relative;
 }
+
 header h1 {
     font-size: 3em;
     margin-bottom: 10px;
     color: #7b5840;
 }
+
 header p {
     font-size: 1.2em;
     color: #856a5d;
@@ -35,14 +37,15 @@ header p {
 #music-control-center {
     position: absolute;
     top: 20px;
-    left: 20px; /* Adjusted to place it on the left side */
+    left: 20px; /* Positioned on the left */
     display: flex;
-    align-items: center;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align */
     justify-content: center;
-    gap: 10px;
-    padding: 10px 15px;
-    background-color: #e8f5e9; /* Changed to a distinct light green */
-    border: 2px solid #66bb6a; /* Green border for better distinction */
+    gap: 10px; /* Space between elements */
+    padding: 15px 20px;
+    background-color: #e8f5e9; /* Light green background */
+    border: 2px solid #66bb6a;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -54,43 +57,53 @@ header p {
 }
 
 .music-label {
-    font-size: 0.9rem;
-    color: #388e3c; /* Darker green for label text */
-    margin-right: 10px;
+    font-size: 1rem;
+    color: #388e3c; /* Dark green for label */
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .music-button {
-    background-color: #66bb6a; /* Green buttons */
+    background-color: #66bb6a;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .music-button:hover {
-    background-color: #388e3c; /* Darker green on hover */
+    background-color: #388e3c;
     transform: scale(1.1);
 }
 
-.music-button:focus {
-    outline: 2px solid #388e3c;
-    outline-offset: 2px;
+.music-button.active {
+    background-color: #2e7d32;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.8);
 }
 
-.music-button.active {
-    background-color: #2e7d32; /* Highlighted button color */
-    box-shadow: 0 0 8px rgba(46, 125, 50, 0.8); /* Green glow for active button */
+/* Volume Slider Container */
+.volume-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px;
+}
+
+.volume-label {
+    font-size: 0.9rem;
+    color: #388e3c;
+    font-weight: bold;
 }
 
 #volume-slider {
     appearance: none;
-    width: 100px;
+    width: 120px;
     height: 8px;
-    background: #66bb6a; /* Volume slider background */
+    background: #66bb6a;
     border-radius: 5px;
     outline: none;
     transition: background 0.3s ease;
@@ -100,14 +113,14 @@ header p {
     appearance: none;
     width: 16px;
     height: 16px;
-    background: #2e7d32; /* Thumb color */
+    background: #2e7d32;
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 #volume-slider::-webkit-slider-thumb:hover {
-    background-color: #1b5e20; /* Darker green on hover */
+    background-color: #1b5e20;
 }
 
 /* Hidden State for Optional Elements */
@@ -152,22 +165,27 @@ header p {
 .content-section {
     margin-bottom: 20px;
 }
+
 .content-section h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #7b5840;
 }
+
 ul {
     padding-left: 20px;
 }
+
 ul li {
     margin: 10px 0;
 }
+
 ul li a {
     color: #5a2d22;
     text-decoration: none;
     font-weight: bold;
 }
+
 ul li a:hover {
     text-decoration: underline;
 }
@@ -236,7 +254,8 @@ iframe#viewer:hover {
         flex-direction: column;
     }
 
-    #table-of-contents, iframe#viewer {
+    #table-of-contents,
+    iframe#viewer {
         width: 100%;
         height: auto;
     }
