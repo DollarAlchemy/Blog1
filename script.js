@@ -28,19 +28,19 @@ const forwardButton = document.getElementById("forward-btn");
 const clearButton = document.getElementById("clear-btn");
 const iframe = document.getElementById("viewer");
 const links = document.querySelectorAll("#table-of-contents a");
-const musicToggle = document.getElementById("toggle-music");
-const audio = document.getElementById("background-audio"); // Use the existing audio element
+const musicToggle = document.getElementById("music-toggle");
+const audio = document.getElementById("background-audio");
 
 // Initialize audio controls
-audio.loop = true; // Ensure the audio loops
+audio.loop = true;
 
 musicToggle.addEventListener("click", () => {
     if (audio.paused) {
         audio.play();
-        musicToggle.textContent = "Pause Music"; // Update button text
+        musicToggle.textContent = "Pause Music";
     } else {
         audio.pause();
-        musicToggle.textContent = "Play Music"; // Update button text
+        musicToggle.textContent = "Play Music";
     }
 });
 
@@ -76,11 +76,10 @@ function highlightActiveLink(href) {
     });
 }
 
-// Update navigation button states (enable/disable)
+// Update navigation button states
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled =
-        currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
+    forwardButton.disabled = currentIndex >= topics.length - 1;
     clearButton.disabled = currentIndex === -1 && pageHistory.length === 0;
 }
 
@@ -96,9 +95,8 @@ links.forEach((link) => {
 backButton.addEventListener("click", () => {
     if (currentIndex > 0) {
         currentIndex--;
-        const previousPage = pageHistory[currentIndex] || topics[currentIndex];
-        iframe.src = previousPage;
-        highlightActiveLink(previousPage);
+        iframe.src = pageHistory[currentIndex] || topics[currentIndex];
+        highlightActiveLink(pageHistory[currentIndex]);
         updateButtonStates();
     }
 });
@@ -107,15 +105,9 @@ backButton.addEventListener("click", () => {
 forwardButton.addEventListener("click", () => {
     if (currentIndex < topics.length - 1) {
         currentIndex++;
-        const nextPage = topics[currentIndex];
-        iframe.src = nextPage;
-
-        // Add to history if it wasn't navigated manually
-        if (!pageHistory.includes(nextPage)) {
-            pageHistory.push(nextPage);
-        }
-
-        highlightActiveLink(nextPage);
+        iframe.src = topics[currentIndex];
+        pageHistory.push(topics[currentIndex]);
+        highlightActiveLink(topics[currentIndex]);
         updateButtonStates();
     }
 });
@@ -123,10 +115,10 @@ forwardButton.addEventListener("click", () => {
 // Clear Button Logic
 clearButton.addEventListener("click", () => {
     iframe.src = defaultPage; // Reset the iframe to the default page
-    pageHistory = []; // Reset the history
-    currentIndex = -1; // Reset index
-    links.forEach((link) => link.classList.remove("active")); // Remove active class from all links
-    updateButtonStates(); // Disable navigation buttons
+    pageHistory = [];
+    currentIndex = -1;
+    links.forEach((link) => link.classList.remove("active"));
+    updateButtonStates();
 });
 
 // Load the default page when the index.html is loaded
