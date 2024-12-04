@@ -1,3 +1,258 @@
+/* Reset */
+body, h1, h2, h3, p, ul, li, a, button {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* General Styling */
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.8;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--header-color);
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+/* Music Control Center */
+#music-control-center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background-color: #e8f5e9;
+    border: 2px solid #66bb6a;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    margin: 0 auto;
+    transition: background-color 0.3s ease;
+}
+
+#music-control-center:hover {
+    background-color: #c8e6c9;
+    transform: scale(1.02);
+}
+
+.music-label {
+    font-size: 1rem;
+    color: #388e3c;
+    font-weight: bold;
+    text-align: center;
+}
+
+.music-button {
+    width: 100px;
+    background-color: #66bb6a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.music-button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+.music-button.active {
+    background-color: #2e7d32;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.8);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.volume-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.volume-label {
+    font-size: 0.9rem;
+    color: #388e3c;
+    font-weight: bold;
+    text-align: center;
+}
+
+#volume-slider {
+    appearance: none;
+    width: 80%;
+    height: 8px;
+    background: #66bb6a;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #2e7d32;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#volume-slider::-webkit-slider-thumb:hover {
+    background-color: #1b5e20;
+}
+
+/* Main Layout */
+#main-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* Table of Contents */
+#table-of-contents {
+    flex: 1 1 300px;
+    max-width: 300px;
+    background-color: #fff7e6;
+    padding: 20px;
+    border: 3px solid #b68973;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+#table-of-contents h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #7b5840;
+}
+
+#table-of-contents hr {
+    border: none;
+    height: 1px;
+    background-color: #b68973;
+    margin: 10px 0;
+}
+
+.content-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #7b5840;
+}
+
+ul li a {
+    color: #5a2d22;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+ul li a.active {
+    color: #ffffff;
+    background-color: #7b5840;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Viewer Controls */
+#viewer-controls {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    justify-content: flex-start;
+}
+
+#viewer-controls button {
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #7b5840;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#viewer-controls button:hover:not(:disabled),
+#viewer-controls button:focus {
+    background-color: #5a2d22;
+    transform: scale(1.05);
+}
+
+#viewer-controls button:disabled {
+    background-color: #d6c7b8;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Embedded Viewer */
+iframe#viewer {
+    flex: 3;
+    width: 100%;
+    height: calc(100vh - 150px);
+    border: 3px solid #b68973;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #faf3e0, #f0e0c6);
+    transform-origin: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+iframe#viewer:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    transform: scale(1.02);
+}
+
+/* Footer Styling */
+footer {
+    background-color: var(--footer-bg);
+    padding: 20px;
+    text-align: center;
+    border-top: 3px solid #b68973;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer .navigation-tips {
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Dark Mode Styling */
 :root {
     --bg-color: #faf3e0;
     --text-color: #4a4a4a;
@@ -14,59 +269,23 @@ body.dark-mode {
     --footer-bg: #1c1c1c;
 }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Georgia', serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+    #main-container {
+        flex-direction: column;
+    }
 
-header {
-    text-align: center;
-    color: var(--header-color);
-}
+    #table-of-contents,
+    iframe#viewer {
+        width: 100%;
+        height: auto;
+    }
 
-/* Music Control Center */
-#music-control-center {
-    background-color: #e8f5e9;
-    border: 2px solid #66bb6a;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px auto;
-    width: 300px;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
+    #viewer-controls {
+        justify-content: center;
+    }
 
-/* Footer Styling */
-footer {
-    background-color: var(--footer-bg);
-    padding: 20px;
-    text-align: center;
-    border-top: 3px solid #b68973;
-}
-
-#footer-links a {
-    color: var(--link-color);
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-#footer-links a:hover {
-    text-decoration: underline;
-}
-
-#newsletter-form input {
-    padding: 8px;
-    margin-right: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-#newsletter-form button {
-    padding: 8px 12px;
-    background-color: #66bb6a;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+    #music-control-center {
+        margin-bottom: 10px;
+    }
 }
