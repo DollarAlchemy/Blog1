@@ -1,17 +1,34 @@
+// Predefined topics in sequential order
+const topics = [
+    "topics/mastering-focus.html",
+    "topics/breaking-free.html",
+    "topics/overcoming-distractions.html",
+    "topics/purposeful-life.html",
+    "topics/fulfilled-life.html",
+    "topics/embrace-exploration.html",
+    "topics/life-as-game.html",
+    "topics/redefining-work.html",
+    "topics/four-hour-workday.html",
+    "topics/mastering-mind.html",
+    "topics/skill-stacks.html",
+    "topics/value-creation.html",
+    "topics/personal-projects.html",
+];
+
 // Variables to track history
 let pageHistory = [];
 let currentIndex = -1;
 
 // Get DOM elements
-const backButton = document.getElementById('back-btn');
-const forwardButton = document.getElementById('forward-btn');
-const clearButton = document.getElementById('clear-btn');
-const iframe = document.getElementById('viewer');
-const links = document.querySelectorAll('#table-of-contents a');
+const backButton = document.getElementById("back-btn");
+const forwardButton = document.getElementById("forward-btn");
+const clearButton = document.getElementById("clear-btn");
+const iframe = document.getElementById("viewer");
+const links = document.querySelectorAll("#table-of-contents a");
 
 // Update active link and manage history
 function updateActiveLink(event) {
-    const href = event.target.getAttribute('href');
+    const href = event.target.getAttribute("href");
 
     // Add to history if the link is new
     if (pageHistory[currentIndex] !== href) {
@@ -32,11 +49,11 @@ function updateActiveLink(event) {
 
 // Highlight active link in the table of contents
 function highlightActiveLink(href) {
-    links.forEach(link => {
-        if (link.getAttribute('href') === href) {
-            link.classList.add('active');
+    links.forEach((link) => {
+        if (link.getAttribute("href") === href) {
+            link.classList.add("active");
         } else {
-            link.classList.remove('active');
+            link.classList.remove("active");
         }
     });
 }
@@ -44,23 +61,23 @@ function highlightActiveLink(href) {
 // Update navigation button states (enable/disable)
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= pageHistory.length - 1;
-    clearButton.disabled = pageHistory.length === 0;
+    forwardButton.disabled = currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
+    clearButton.disabled = pageHistory.length === 0 && currentIndex === -1;
 }
 
 // Add click listeners to links
-links.forEach(link => {
-    link.addEventListener('click', event => {
+links.forEach((link) => {
+    link.addEventListener("click", (event) => {
         event.preventDefault(); // Prevent default link behavior
         updateActiveLink(event);
     });
 });
 
 // Back Button Logic
-backButton.addEventListener('click', () => {
+backButton.addEventListener("click", () => {
     if (currentIndex > 0) {
         currentIndex--;
-        const previousPage = pageHistory[currentIndex];
+        const previousPage = pageHistory[currentIndex] || topics[currentIndex];
         iframe.src = previousPage;
         highlightActiveLink(previousPage);
         updateButtonStates();
@@ -68,22 +85,28 @@ backButton.addEventListener('click', () => {
 });
 
 // Forward Button Logic
-forwardButton.addEventListener('click', () => {
-    if (currentIndex < pageHistory.length - 1) {
+forwardButton.addEventListener("click", () => {
+    if (currentIndex < topics.length - 1) {
         currentIndex++;
-        const nextPage = pageHistory[currentIndex];
+        const nextPage = topics[currentIndex];
         iframe.src = nextPage;
+
+        // Add to history if it wasn't navigated manually
+        if (!pageHistory.includes(nextPage)) {
+            pageHistory.push(nextPage);
+        }
+
         highlightActiveLink(nextPage);
         updateButtonStates();
     }
 });
 
 // Clear Button Logic
-clearButton.addEventListener('click', () => {
+clearButton.addEventListener("click", () => {
     iframe.src = ""; // Clear the iframe content
     pageHistory = []; // Reset the history
     currentIndex = -1; // Reset index
-    links.forEach(link => link.classList.remove('active')); // Remove active class from all links
+    links.forEach((link) => link.classList.remove("active")); // Remove active class from all links
     updateButtonStates();
 });
 
