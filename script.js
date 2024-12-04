@@ -20,7 +20,7 @@ const defaultPage = "default.html";
 
 // Variables to track history
 let pageHistory = [];
-let currentIndex = 0; // Initialize with the first topic by default
+let currentIndex = -1;
 
 // Get DOM elements
 const backButton = document.getElementById("back-btn");
@@ -37,14 +37,13 @@ const volumeSlider = document.getElementById("volume-slider");
 
 // Initialize music controls
 audio.loop = true;
-audio.volume = 0.25; // Default volume at 25%
-audio.play(); // Start music by default
-volumeSlider.value = 25; // Default slider position at 25%
+audio.volume = 0.5; // Default volume (50%)
+audio.play(); // Ensure music starts by default
+playButton.classList.add("active");
 
-// Update volume based on slider input (0% to 25% with 5% intervals)
+// Update volume based on slider input
 volumeSlider.addEventListener("input", () => {
-    const sliderValue = parseInt(volumeSlider.value, 10); // Get current slider value (0-25)
-    audio.volume = sliderValue / 100; // Scale to match slider value
+    audio.volume = volumeSlider.value / 100;
 });
 
 // Play Music
@@ -69,7 +68,7 @@ function updateActiveLink(event) {
     if (pageHistory[currentIndex] !== href) {
         pageHistory = pageHistory.slice(0, currentIndex + 1); // Clear forward history
         pageHistory.push(href);
-        currentIndex = pageHistory.length - 1;
+        currentIndex++;
     }
 
     // Load the new page in the iframe
@@ -96,9 +95,8 @@ function highlightActiveLink(href) {
 // Update navigation button states
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled =
-        (currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1);
-    clearButton.disabled = pageHistory.length === 0;
+    forwardButton.disabled = currentIndex >= topics.length - 1 || currentIndex >= pageHistory.length - 1;
+    clearButton.disabled = currentIndex === -1 && pageHistory.length === 0;
 }
 
 // Add click listeners to links
@@ -113,7 +111,7 @@ links.forEach((link) => {
 backButton.addEventListener("click", () => {
     if (currentIndex > 0) {
         currentIndex--;
-        iframe.src = pageHistory[currentIndex];
+        iframe.src = pageHistory[currentIndex] || topics[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
         updateButtonStates();
     }
@@ -122,35 +120,30 @@ backButton.addEventListener("click", () => {
 // Forward Button Logic
 forwardButton.addEventListener("click", () => {
     if (currentIndex < pageHistory.length - 1) {
-        // Navigate within history
         currentIndex++;
         iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
+        updateButtonStates();
     } else if (currentIndex < topics.length - 1) {
-        // Navigate to next topic if not in history
         currentIndex++;
-        const newTopic = topics[currentIndex];
-        iframe.src = newTopic;
-        pageHistory.push(newTopic); // Add to history
-        highlightActiveLink(newTopic);
+        iframe.src = topics[currentIndex];
+        pageHistory.push(topics[currentIndex]);
+        highlightActiveLink(topics[currentIndex]);
+        updateButtonStates();
     }
-    updateButtonStates();
 });
 
 // Clear Button Logic
 clearButton.addEventListener("click", () => {
     iframe.src = defaultPage; // Reset the iframe to the default page
-    pageHistory = [defaultPage];
-    currentIndex = 0;
+    pageHistory = [];
+    currentIndex = -1;
     links.forEach((link) => link.classList.remove("active"));
     updateButtonStates();
 });
 
-// Load the default page and initialize history when the page loads
+// Load the default page when the index.html is loaded
 document.addEventListener("DOMContentLoaded", () => {
     iframe.src = defaultPage;
-    pageHistory = [default Page];
-    currentIndex = 0;
     updateButtonStates();
 });
-
