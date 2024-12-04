@@ -9,51 +9,23 @@ const clearButton = document.getElementById('clear-btn');
 const iframe = document.getElementById('viewer');
 const links = document.querySelectorAll('#table-of-contents a');
 
-// Update active link and history
+// Update active link and manage history
 function updateActiveLink(event) {
-    // Update history
     const href = event.target.getAttribute('href');
+
+    // Add to history if the link is new
     if (pageHistory[currentIndex] !== href) {
-        pageHistory = pageHistory.slice(0, currentIndex + 1);
+        pageHistory = pageHistory.slice(0, currentIndex + 1); // Clear forward history
         pageHistory.push(href);
         currentIndex++;
     }
 
-    // Remove active from all links
-    links.forEach(link => link.classList.remove('active'));
-    // Add active to the clicked link
-    event.target.classList.add('active');
+    // Load the new page in the iframe
+    iframe.src = href;
+
+    // Highlight the active link
+    highlightActiveLink(href);
 }
-
-// Add click listeners to links
-links.forEach(link => {
-    link.addEventListener('click', event => {
-        updateActiveLink(event);
-    });
-});
-
-// Back Button Logic
-backButton.addEventListener('click', () => {
-    if (currentIndex > 0) {
-        currentIndex--;
-        iframe.src = pageHistory[currentIndex];
-        highlightActiveLink(pageHistory[currentIndex]);
-    }
-});
-
-// Forward Button Logic
-forwardButton.addEventListener('click', () => {
-    if (currentIndex < pageHistory.length - 1) {
-        currentIndex++;
-        iframe.src = pageHistory[currentIndex];
-        highlightActiveLink(pageHistory[currentIndex]);
-    }
-});
-
-// Clear Button Logic
-clearButton.addEventListener('click', () => {
-    location.reload(); // Reload the entire page
-});
 
 // Highlight active link in the table of contents
 function highlightActiveLink(href) {
@@ -65,3 +37,39 @@ function highlightActiveLink(href) {
         }
     });
 }
+
+// Add click listeners to links
+links.forEach(link => {
+    link.addEventListener('click', event => {
+        event.preventDefault(); // Prevent default link behavior
+        updateActiveLink(event);
+    });
+});
+
+// Back Button Logic
+backButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        const previousPage = pageHistory[currentIndex];
+        iframe.src = previousPage;
+        highlightActiveLink(previousPage);
+    }
+});
+
+// Forward Button Logic
+forwardButton.addEventListener('click', () => {
+    if (currentIndex < pageHistory.length - 1) {
+        currentIndex++;
+        const nextPage = pageHistory[currentIndex];
+        iframe.src = nextPage;
+        highlightActiveLink(nextPage);
+    }
+});
+
+// Clear Button Logic
+clearButton.addEventListener('click', () => {
+    iframe.src = ""; // Clear the iframe content
+    pageHistory = []; // Reset the history
+    currentIndex = -1; // Reset index
+    links.forEach(link => link.classList.remove('active')); // Remove active class from all links
+});
