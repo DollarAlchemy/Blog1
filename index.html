@@ -10,28 +10,29 @@
     <header>
         <h1>Designing a Fulfilled and Focused Life</h1>
         <p>Welcome to a journey of mindfulness, focus, and purposeful living.</p>
-        
+
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-toggle">🌙 Toggle Dark Mode</button>
+
         <!-- Music Control Center -->
-      <div id="music-control-center" class="music-control">
-    <p class="music-label">Music Controls</p>
-    <div class="button-group">
-        <button id="play-btn" class="music-button active">▶ Play</button>
-        <button id="pause-btn" class="music-button">⏸ Pause</button>
-    </div>
-    <div class="volume-container">
-        <p class="volume-label">Volume</p>
-        <!-- Slider adjusted to range from 0 to 25 -->
-        <input id="volume-slider" type="range" min="0" max="25" step="5" value="25" title="Volume">
-    </div>
-    <audio id="background-audio" autoplay loop>
-        <source src="music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-</div>
-
-
+        <div id="music-control-center" class="music-control">
+            <p class="music-label">Music Controls</p>
+            <div class="button-group">
+                <button id="play-btn" class="music-button active">▶ Play</button>
+                <button id="pause-btn" class="music-button">⏸ Pause</button>
+            </div>
+            <div class="volume-container">
+                <p class="volume-label">Volume</p>
+                <input id="volume-slider" type="range" min="0" max="25" step="5" value="25" title="Volume">
+            </div>
+            <audio id="background-audio" autoplay loop>
+                <source src="music.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
         <hr />
     </header>
+
     <main>
         <div id="main-container">
             <section id="table-of-contents">
@@ -42,36 +43,34 @@
                     <button id="forward-btn">Forward</button>
                 </div>
                 <hr />
+                <!-- Table of Contents -->
                 <div class="content-section">
                     <h3>Part 1: Foundations</h3>
                     <ul>
-                        <li><a href="topics/mastering-focus.html" target="viewer" data-page="mastering-focus">Mastering Focus</a></li>
-                        <li><a href="topics/breaking-free.html" target="viewer" data-page="breaking-free">Breaking Free from the Default Path</a></li>
-                        <li><a href="topics/overcoming-distractions.html" target="viewer" data-page="overcoming-distractions">Understanding and Overcoming Distractions</a></li>
-                        <li><a href="topics/purposeful-life.html" target="viewer" data-page="purposeful-life">Principles for a Purposeful Life</a></li>
-                        <li><a href="topics/fulfilled-life.html" target="viewer" data-page="fulfilled-life">Pillars of a Fulfilled Life</a></li>
-                    </ul>
-                </div>
-                <div class="content-section">
-                    <h3>Part 2: Mastery</h3>
-                    <ul>
-                        <li><a href="topics/embrace-exploration.html" target="viewer" data-page="embrace-exploration">Embrace Exploration</a></li>
-                        <li><a href="topics/life-as-game.html" target="viewer" data-page="life-as-game">Life as a Game</a></li>
-                        <li><a href="topics/redefining-work.html" target="viewer" data-page="redefining-work">Redefining Work</a></li>
-                        <li><a href="topics/four-hour-workday.html" target="viewer" data-page="four-hour-workday">The 4-Hour Workday Philosophy</a></li>
-                        <li><a href="topics/mastering-mind.html" target="viewer" data-page="mastering-mind">Mastering the Mind</a></li>
-                        <li><a href="topics/skill-stacks.html" target="viewer" data-page="skill-stacks">Build Skill Stacks</a></li>
-                        <li><a href="topics/value-creation.html" target="viewer" data-page="value-creation">Value Creation</a></li>
-                        <li><a href="topics/personal-projects.html" target="viewer" data-page="personal-projects">Launch Personal Projects</a></li>
+                        <li><a href="topics/mastering-focus.html" target="viewer">Mastering Focus</a></li>
+                        <!-- Other topics -->
                     </ul>
                 </div>
             </section>
             <iframe id="viewer" name="viewer"></iframe>
         </div>
     </main>
+
+    <!-- Enhanced Footer -->
     <footer>
+        <div id="footer-links">
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            <a href="mailto:contact@fulfilledlife.com">Contact Us</a>
+        </div>
+        <form id="newsletter-form">
+            <label for="email">Subscribe to our Newsletter:</label>
+            <input type="email" id="email" placeholder="Your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
         <p>&copy; 2024 Thomas Giardino. All rights reserved.</p>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
