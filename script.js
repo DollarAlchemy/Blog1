@@ -20,7 +20,7 @@ const defaultPage = "default.html";
 
 // Variables to track history
 let pageHistory = [];
-let currentIndex = -1;
+let currentIndex = 0; // Initialize with the first topic by default
 
 // Get DOM elements
 const backButton = document.getElementById("back-btn");
@@ -37,13 +37,14 @@ const volumeSlider = document.getElementById("volume-slider");
 
 // Initialize music controls
 audio.loop = true;
-audio.volume = 0.5; // Default volume (50%)
-audio.play(); // Ensure music starts by default
-playButton.classList.add("active");
+audio.volume = 0.25; // Default volume at 25%
+audio.play(); // Start music by default
+volumeSlider.value = 25; // Default slider position at 25%
 
-// Update volume based on slider input
+// Volume Slider Logic
 volumeSlider.addEventListener("input", () => {
-    audio.volume = volumeSlider.value / 100;
+    const sliderValue = parseInt(volumeSlider.value, 10); // Get current slider value
+    audio.volume = sliderValue / 100; // Scale slider value (0-25) to audio volume (0.0-0.25)
 });
 
 // Play Music
@@ -60,28 +61,21 @@ pauseButton.addEventListener("click", () => {
     playButton.classList.remove("active");
 });
 
-// Update active link and manage history
+// Active Link and History Management
 function updateActiveLink(event) {
     const href = event.target.getAttribute("href");
 
-    // Add to history if the link is new
     if (pageHistory[currentIndex] !== href) {
         pageHistory = pageHistory.slice(0, currentIndex + 1); // Clear forward history
         pageHistory.push(href);
-        currentIndex++;
+        currentIndex = pageHistory.length - 1;
     }
 
-    // Load the new page in the iframe
     iframe.src = href;
-
-    // Highlight the active link
     highlightActiveLink(href);
-
-    // Update button states
     updateButtonStates();
 }
 
-// Highlight active link in the table of contents
 function highlightActiveLink(href) {
     links.forEach((link) => {
         if (link.getAttribute("href") === href) {
@@ -92,58 +86,54 @@ function highlightActiveLink(href) {
     });
 }
 
-// Update navigation button states
+// Navigation Buttons
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= topics.length - 1 || currentIndex >= pageHistory.length - 1;
-    clearButton.disabled = currentIndex === -1 && pageHistory.length === 0;
+    forwardButton.disabled = currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
+    clearButton.disabled = pageHistory.length === 0;
 }
 
-// Add click listeners to links
 links.forEach((link) => {
     link.addEventListener("click", (event) => {
-        event.preventDefault(); // Prevent default link behavior
+        event.preventDefault();
         updateActiveLink(event);
     });
 });
 
-// Back Button Logic
 backButton.addEventListener("click", () => {
     if (currentIndex > 0) {
         currentIndex--;
-        iframe.src = pageHistory[currentIndex] || topics[currentIndex];
+        iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
         updateButtonStates();
     }
 });
 
-// Forward Button Logic
 forwardButton.addEventListener("click", () => {
     if (currentIndex < pageHistory.length - 1) {
         currentIndex++;
         iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
-        updateButtonStates();
     } else if (currentIndex < topics.length - 1) {
         currentIndex++;
-        iframe.src = topics[currentIndex];
-        pageHistory.push(topics[currentIndex]);
-        highlightActiveLink(topics[currentIndex]);
-        updateButtonStates();
+        const newTopic = topics[currentIndex];
+        iframe.src = newTopic;
+        pageHistory.push(newTopic);
+        highlightActiveLink(newTopic);
     }
+    updateButtonStates();
 });
 
-// Clear Button Logic
 clearButton.addEventListener("click", () => {
-    iframe.src = defaultPage; // Reset the iframe to the default page
-    pageHistory = [];
-    currentIndex = -1;
+    iframe.src = defaultPage;
+    pageHistory = [defaultPage];
+    currentIndex = 0;
     links.forEach((link) => link.classList.remove("active"));
     updateButtonStates();
 });
 
-// Load the default page when the index.html is loaded
 document.addEventListener("DOMContentLoaded", () => {
     iframe.src = defaultPage;
+    pageHistory = [defaultPage];
     updateButtonStates();
 });
