@@ -38,34 +38,50 @@ header p {
     right: 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 10px; /* Add spacing between elements if needed */
-    padding: 8px 12px;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 15px;
     background-color: #fff7e6;
     border: 2px solid #b68973;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#music-control-center:hover {
+    background-color: #f9ede3;
+    transform: scale(1.02);
 }
 
 .music-button {
     background-color: #7b5840;
-    color: #ffffff;
+    color: white;
     border: none;
     border-radius: 5px;
-    padding: 8px 12px;
-    font-size: 0.9em;
+    padding: 8px 15px;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .music-button:hover {
     background-color: #5a2d22;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .music-button:focus {
     outline: 2px solid #5a2d22;
     outline-offset: 2px;
+}
+
+.music-indicator {
+    font-size: 0.9rem;
+    color: #4a4a4a;
+}
+
+/* Hidden State for Optional Elements */
+.hidden {
+    display: none;
 }
 
 /* Main Layout */
@@ -196,5 +212,12 @@ iframe#viewer:hover {
 
     #viewer-controls {
         justify-content: center;
+    }
+
+    #music-control-center {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 10px;
     }
 }
