@@ -35,33 +35,33 @@ header p {
 #music-control-center {
     position: absolute;
     top: 20px;
-    right: 20px;
+    left: 20px; /* Adjusted to place it on the left side */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     padding: 10px 15px;
-    background-color: #fff7e6;
-    border: 2px solid #b68973;
+    background-color: #e8f5e9; /* Changed to a distinct light green */
+    border: 2px solid #66bb6a; /* Green border for better distinction */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #music-control-center:hover {
-    background-color: #f9ede3;
+    background-color: #c8e6c9; /* Slightly darker green on hover */
     transform: scale(1.02);
 }
 
 .music-label {
     font-size: 0.9rem;
-    color: #4a4a4a;
+    color: #388e3c; /* Darker green for label text */
     margin-right: 10px;
     font-weight: bold;
 }
 
 .music-button {
-    background-color: #7b5840;
+    background-color: #66bb6a; /* Green buttons */
     color: white;
     border: none;
     border-radius: 5px;
@@ -72,18 +72,42 @@ header p {
 }
 
 .music-button:hover {
-    background-color: #5a2d22;
+    background-color: #388e3c; /* Darker green on hover */
     transform: scale(1.1);
 }
 
 .music-button:focus {
-    outline: 2px solid #5a2d22;
+    outline: 2px solid #388e3c;
     outline-offset: 2px;
 }
 
 .music-button.active {
-    background-color: #5a2d22;
-    box-shadow: 0 0 8px rgba(90, 45, 34, 0.8);
+    background-color: #2e7d32; /* Highlighted button color */
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.8); /* Green glow for active button */
+}
+
+#volume-slider {
+    appearance: none;
+    width: 100px;
+    height: 8px;
+    background: #66bb6a; /* Volume slider background */
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #2e7d32; /* Thumb color */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#volume-slider::-webkit-slider-thumb:hover {
+    background-color: #1b5e20; /* Darker green on hover */
 }
 
 /* Hidden State for Optional Elements */
@@ -224,7 +248,7 @@ iframe#viewer:hover {
     #music-control-center {
         position: relative;
         top: 0;
-        right: 0;
+        left: 0;
         margin-bottom: 10px;
     }
 }
