@@ -20,7 +20,7 @@ const defaultPage = "default.html";
 
 // Variables to track history
 let pageHistory = [];
-let currentIndex = -1;
+let currentIndex = 0; // Initialize with the first topic by default
 
 // Get DOM elements
 const backButton = document.getElementById("back-btn");
@@ -70,7 +70,7 @@ function updateActiveLink(event) {
     if (pageHistory[currentIndex] !== href) {
         pageHistory = pageHistory.slice(0, currentIndex + 1); // Clear forward history
         pageHistory.push(href);
-        currentIndex++;
+        currentIndex = pageHistory.length - 1;
     }
 
     // Load the new page in the iframe
@@ -97,7 +97,7 @@ function highlightActiveLink(href) {
 // Update navigation button states
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= pageHistory.length - 1;
+    forwardButton.disabled = currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
     clearButton.disabled = pageHistory.length === 0;
 }
 
@@ -122,11 +122,19 @@ backButton.addEventListener("click", () => {
 // Forward Button Logic
 forwardButton.addEventListener("click", () => {
     if (currentIndex < pageHistory.length - 1) {
+        // Navigate within history
         currentIndex++;
         iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
-        updateButtonStates();
+    } else if (currentIndex < topics.length - 1) {
+        // Navigate to next topic if not in history
+        currentIndex++;
+        const newTopic = topics[currentIndex];
+        iframe.src = newTopic;
+        pageHistory.push(newTopic); // Add to history
+        highlightActiveLink(newTopic);
     }
+    updateButtonStates();
 });
 
 // Clear Button Logic
@@ -138,8 +146,10 @@ clearButton.addEventListener("click", () => {
     updateButtonStates();
 });
 
-// Load the default page when the index.html is loaded
+// Load the default page and initialize history when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     iframe.src = defaultPage;
+    pageHistory = [defaultPage];
+    currentIndex = 0;
     updateButtonStates();
 });
