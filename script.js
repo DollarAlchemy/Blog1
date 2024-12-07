@@ -100,7 +100,7 @@ function highlightActiveLink(href) {
 // Navigation Buttons
 function updateButtonStates() {
     backButton.disabled = currentIndex <= 0;
-    forwardButton.disabled = currentIndex >= pageHistory.length - 1 && currentIndex >= topics.length - 1;
+    forwardButton.disabled = currentIndex >= topics.length - 1;
     clearButton.disabled = pageHistory.length === 0;
 }
 
@@ -125,12 +125,12 @@ forwardButton.addEventListener("click", () => {
         currentIndex++;
         iframe.src = pageHistory[currentIndex];
         highlightActiveLink(pageHistory[currentIndex]);
-    } else if (currentIndex < topics.length - 1) {
-        currentIndex++;
-        const newTopic = topics[currentIndex];
+    } else if (currentIndex < topics.length) {
+        const newTopic = topics[currentIndex]; // Fetch the correct topic.
         iframe.src = newTopic;
-        pageHistory.push(newTopic);
+        pageHistory.push(newTopic); // Add to history.
         highlightActiveLink(newTopic);
+        currentIndex++; // Move to the next index.
     }
     updateButtonStates();
 });
